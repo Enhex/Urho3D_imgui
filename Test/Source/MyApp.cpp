@@ -6,10 +6,6 @@
 #include <im/Urho3D/imguiEvents.h>
 #include <imgui.h>
 
-#include <Urho3D/Resource/ResourceCache.h>
-#include <Urho3D/UI/UI.h>
-#include <Urho3D/UI/Text.h>
-#include <Urho3D/UI/Font.h>
 
 //
 // Constructor
