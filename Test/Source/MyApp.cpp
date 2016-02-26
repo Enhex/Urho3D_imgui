@@ -2,6 +2,10 @@
 #include <Urho3D/Engine/Engine.h>
 #include <Urho3D/Input/Input.h>
 #include <Urho3D/Input/InputEvents.h>
+#include <Urho3D/Graphics/Renderer.h>
+#include <Urho3D/Graphics/Zone.h>
+#include <Urho3D/Graphics/Texture2D.h>
+#include <Urho3D/Resource/ResourceCache.h>
 
 #include <im/Urho3D/imguiEvents.h>
 #include <imgui.h>
@@ -27,6 +31,11 @@ void MyApp::Setup()
 //
 void MyApp::Start()
 {
+	// Set background color
+	auto renderer = GetSubsystem<Renderer>();
+	auto zone = renderer->GetDefaultZone();
+	zone->SetFogColor(Color(0.4f, 0.65f, 0.9f));
+
 	// Enable OS cursor
 	GetSubsystem<Input>()->SetMouseVisible(true);
 
@@ -66,5 +75,14 @@ void MyApp::HandleImGuiNewFrame(StringHash eventType, VariantMap& eventData)
 		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 	}
 
+	// imgui's Test window
 	ImGui::ShowTestWindow();
+
+	// Using Urho3D texture with the integration's renderer
+	auto cache = GetSubsystem<ResourceCache>();
+	auto logoTexture = cache->GetResource<Texture2D>("Textures/LogoLarge.png");
+	if (!logoTexture)
+		return;
+
+	ImGui::Image((ImTextureID)logoTexture->GetGPUObject(), ImVec2(logoTexture->GetWidth(), logoTexture->GetHeight()), ImVec2(0, 0), ImVec2(1, 1), ImColor(255, 255, 255, 255), ImColor(255, 255, 255, 128));
 }
