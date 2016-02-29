@@ -84,5 +84,5 @@ void MyApp::HandleImGuiNewFrame(StringHash eventType, VariantMap& eventData)
 	if (!logoTexture)
 		return;
 
-	ImGui::Image((ImTextureID)logoTexture->GetGPUObject(), ImVec2(logoTexture->GetWidth(), logoTexture->GetHeight()), ImVec2(0, 0), ImVec2(1, 1), ImColor(255, 255, 255, 255), ImColor(255, 255, 255, 128));
+	ImGui::Image(logoTexture, ImVec2((float)logoTexture->GetWidth(), (float)logoTexture->GetHeight()), ImVec2(0, 0), ImVec2(1, 1), ImColor(255, 255, 255, 255), ImColor(255, 255, 255, 128));
 }

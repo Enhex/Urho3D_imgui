@@ -7,13 +7,18 @@
 #include <GLEW/glew.h>
 
 struct ImDrawData;
+namespace Urho3D
+{
+	class Context;
+	class Texture2D;
+}
 
 
-GLuint ImGui_Impl_GetFontTexture();
+Urho3D::Texture2D* ImGui_Impl_GetFontTexture();
 
 void ImGui_Impl_RenderDrawLists(ImDrawData* draw_data);
-void        ImGui_Impl_Shutdown();
+void ImGui_Impl_Shutdown();
 
 // Use if you want to reset your rendering device without losing ImGui state.
-void        ImGui_Impl_InvalidateDeviceObjects();
-bool        ImGui_Impl_CreateDeviceObjects();
+void ImGui_Impl_InvalidateDeviceObjects();
+bool ImGui_Impl_CreateDeviceObjects(Urho3D::Context* context);

@@ -16,6 +16,7 @@ namespace Urho3D
 
 	public:
 		imgui(Context* context);
+		~imgui();
 
 
 

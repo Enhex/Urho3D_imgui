@@ -65,6 +65,15 @@ namespace Urho3D
 
 
 	//
+	// Desctructor
+	//
+	imgui::~imgui()
+	{
+		ImGui_Impl_InvalidateDeviceObjects();
+	}
+
+
+	//
 	// GetClipboardText
 	//
 	const char * imgui::GetClipboardText()
@@ -88,7 +97,7 @@ namespace Urho3D
 	void imgui::HandlePostUpdate(StringHash eventType, VariantMap & eventData)
 	{
 		if (!ImGui_Impl_GetFontTexture())
-			ImGui_Impl_CreateDeviceObjects();
+			ImGui_Impl_CreateDeviceObjects(context_);
 
 		using namespace PostUpdate;
 		float timeStep = eventData[P_TIMESTEP].GetFloat();
