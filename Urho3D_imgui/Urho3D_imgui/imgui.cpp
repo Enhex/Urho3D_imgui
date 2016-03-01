@@ -111,7 +111,7 @@ namespace Urho3D
 		// Setup time step
 		io.DeltaTime = timeStep > 0.0f ? timeStep : 1.0f / 60.0f;
 
-		// mouse input handling
+		// mouse input
 		auto input = GetSubsystem<Input>();
 		if (input->IsMouseVisible() && !input->GetTouchEmulation())
 		{
@@ -131,6 +131,10 @@ namespace Urho3D
 		io.MouseDown[2] = input->GetMouseButtonDown(MOUSEB_MIDDLE);
 		io.MouseWheel = (float)input->GetMouseMoveWheel();
 
+		// Modifiers
+		io.KeyCtrl = input->GetQualifierDown(QUAL_CTRL);
+		io.KeyShift = input->GetQualifierDown(QUAL_SHIFT);
+		io.KeyAlt = input->GetQualifierDown(QUAL_ALT);
 
 		// Start new ImGui frame
 		ImGui::NewFrame();
