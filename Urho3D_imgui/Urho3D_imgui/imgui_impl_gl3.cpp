@@ -246,7 +246,7 @@ void    ImGui_Impl_InvalidateDeviceObjects()
 
 	if (g_FontTexture)
 	{
-		auto object = g_FontTexture->GetGPUObject();
+		auto object = g_FontTexture->GetGPUObjectName();
 		glDeleteTextures(1, &object);
 		ImGui::GetIO().Fonts->TexID = 0;
 		g_FontTexture.Reset();
