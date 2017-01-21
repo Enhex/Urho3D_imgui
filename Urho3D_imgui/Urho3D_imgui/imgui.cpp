@@ -76,7 +76,7 @@ namespace Urho3D
 	//
 	// GetClipboardText
 	//
-	const char * imgui::GetClipboardText()
+	const char * imgui::GetClipboardText(void* user_data)
 	{
 		return SDL_GetClipboardText();
 	}
@@ -85,7 +85,7 @@ namespace Urho3D
 	//
 	// SetClipboardText
 	//
-	void imgui::SetClipboardText(const char * text)
+	void imgui::SetClipboardText(void* user_data, const char * text)
 	{
 		SDL_SetClipboardText(text);
 	}

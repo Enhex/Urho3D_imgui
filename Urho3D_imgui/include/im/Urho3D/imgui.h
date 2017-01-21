@@ -27,8 +27,8 @@ namespace Urho3D
 		int single_touchID;
 
 
-		static const char* GetClipboardText();
-		static void SetClipboardText(const char* text);
+		static const char* GetClipboardText(void* user_data);
+		static void SetClipboardText(void* user_data, const char* text);
 
 		// Call ImGui::NewFrame()
 		void HandlePostUpdate(StringHash eventType, VariantMap& eventData);
