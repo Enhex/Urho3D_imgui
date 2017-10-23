@@ -5,7 +5,7 @@
 // https://github.com/ocornut/imgui
 
 #include <imgui.h>
-#include "../include/im/Urho3D/imgui_impl_gl3.h"
+#include "im/Urho3D/imgui_impl_gl3.h"
 #include <Urho3D/Graphics/Graphics.h>
 #include <Urho3D/Graphics/GraphicsImpl.h>
 #include <Urho3D/Graphics/Texture2D.h>
@@ -96,7 +96,7 @@ void ImGui_Impl_RenderDrawLists(ImDrawData* draw_data)
 			else
 			{
 				auto texture = static_cast<Urho3D::Texture2D*>(pcmd->TextureId);
-				glBindTexture(GL_TEXTURE_2D, (GLuint)texture->GetGPUObject());
+				glBindTexture(GL_TEXTURE_2D, texture->GetGPUObjectName());
 				texture->UpdateParameters();
 				glScissor((int)pcmd->ClipRect.x, (int)(fb_height - pcmd->ClipRect.w), (int)(pcmd->ClipRect.z - pcmd->ClipRect.x), (int)(pcmd->ClipRect.w - pcmd->ClipRect.y));
 				glDrawElements(GL_TRIANGLES, (GLsizei)pcmd->ElemCount, sizeof(ImDrawIdx) == 2 ? GL_UNSIGNED_SHORT : GL_UNSIGNED_INT, idx_buffer_offset);
