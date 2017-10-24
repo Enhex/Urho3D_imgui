@@ -1,7 +1,6 @@
-#include "..\include\im\Urho3D\imgui.h"
-
-#include "..\include\im\Urho3D\imguiEvents.h"
-#include "../include/im/Urho3D/imguiGraphics.h"
+#include "im/Urho3D/imgui.h"
+#include "im/Urho3D/imguiEvents.h"
+#include "im/Urho3D/imguiGraphics.h"
 
 #include <imgui.h>
 
