@@ -1,23 +1,14 @@
 #include "MyApp.hpp"
 #include <Urho3D/Engine/Engine.h>
+#include <Urho3D/Graphics/Renderer.h>
+#include <Urho3D/Graphics/Texture2D.h>
+#include <Urho3D/Graphics/Zone.h>
 #include <Urho3D/Input/Input.h>
 #include <Urho3D/Input/InputEvents.h>
-#include <Urho3D/Graphics/Renderer.h>
-#include <Urho3D/Graphics/Zone.h>
-#include <Urho3D/Graphics/Texture2D.h>
 #include <Urho3D/Resource/ResourceCache.h>
 
 #include <im/Urho3D/imguiEvents.h>
 #include <imgui.h>
-
-
-//
-// Constructor
-//
-MyApp::MyApp(Context* context) :
-Application(context)
-{
-}
 
 
 void MyApp::Setup()
@@ -40,7 +31,7 @@ void MyApp::Start()
 	GetSubsystem<Input>()->SetMouseVisible(true);
 
 	// Create the imgui system
-	imGui = new imgui(context_);
+	imGui = MakeShared<imgui>(context_);
 
 	// Called after engine initialization. Setup application & subscribe to events here
 	SubscribeToEvent(E_KEYDOWN, URHO3D_HANDLER(MyApp, HandleKeyDown));
@@ -56,7 +47,7 @@ void MyApp::HandleKeyDown(StringHash eventType, VariantMap& eventData)
 	using namespace KeyDown;
 	// Check for pressing ESC. Note the engine_ member variable for convenience access to the Engine object
 	int key = eventData[P_KEY].GetInt();
-	if (key == KEY_ESC)
+	if (key == KEY_ESCAPE)
 		engine_->Exit();
 }
 

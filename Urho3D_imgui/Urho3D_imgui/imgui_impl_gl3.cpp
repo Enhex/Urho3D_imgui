@@ -1,11 +1,13 @@
 // ImGui GLFW binding with OpenGL3 + shaders
+// In this binding, ImTextureID is used to store an OpenGL 'GLuint' texture identifier. Read the FAQ about ImTextureID in imgui.cpp.
+
 // You can copy and use unmodified imgui_impl_* files in your project. See main.cpp for an example of using this.
 // If you use this binding you'll need to call 4 functions: ImGui_ImplXXXX_Init(), ImGui_ImplXXXX_NewFrame(), ImGui::Render() and ImGui_ImplXXXX_Shutdown().
 // If you are new to ImGui, see examples/README.txt and documentation at the top of imgui.cpp.
 // https://github.com/ocornut/imgui
 
 #include <imgui.h>
-#include "im/Urho3D/imgui_impl_gl3.h"
+#include "../include/im/Urho3D/imgui_impl_gl3.h"
 #include <Urho3D/Graphics/Graphics.h>
 #include <Urho3D/Graphics/GraphicsImpl.h>
 #include <Urho3D/Graphics/Texture2D.h>
@@ -132,7 +134,7 @@ bool ImGui_ImplGlfwGL3_CreateFontsTexture(Urho3D::Context* context)
 	GLint last_texture;
 	glGetIntegerv(GL_TEXTURE_BINDING_2D, &last_texture);
 
-	g_FontTexture = new Urho3D::Texture2D(context);
+	g_FontTexture = Urho3D::MakeShared<Urho3D::Texture2D>(context);
 	g_FontTexture->SetNumLevels(1);
 	g_FontTexture->SetSize(width, height, Urho3D::Graphics::GetRGBAFormat());
 	g_FontTexture->SetData(0, 0, 0, width, height, pixels);

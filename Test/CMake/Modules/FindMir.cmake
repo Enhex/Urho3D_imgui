@@ -20,24 +20,27 @@
 # THE SOFTWARE.
 #
 
-# Find PulseAudio development library
+# Find Mir display server
 #
-#  PULSEAUDIO_FOUND
-#  PULSEAUDIO_INCLUDE_DIRS
-#  PULSEAUDIO_LIBRARIES
-#  PULSEAUDIO_VERSION
+#  MIR_FOUND
+#  MIR_INCLUDE_DIRS
+#  MIR_CLIENT
+#  MIR_COMMON
+#  EGL
+#  XKB
 #
 
-find_path (PULSEAUDIO_INCLUDE_DIRS NAMES pulse/pulseaudio.h DOC "PulseAudio include directory")
-find_library (PULSEAUDIO_LIBRARIES NAMES pulse-simple DOC "PulseAudio library")
-
-if (NOT PULSEAUDIO_VERSION AND PULSEAUDIO_INCLUDE_DIRS AND EXISTS ${PULSEAUDIO_INCLUDE_DIRS}/pulse/version.h)   # Only do this once
-    file (STRINGS ${PULSEAUDIO_INCLUDE_DIRS}/pulse/version.h PULSEAUDIO_VERSION REGEX "^.*pa_get_headers_version.+\"[^\"]*\".*$")
-    string (REGEX REPLACE "^.*pa_get_headers_version.+\"([^\"]*)\".*$" \\1 PULSEAUDIO_VERSION "${PULSEAUDIO_VERSION}")      # Stringify to guard against empty variable
-    set (PULSEAUDIO_VERSION "${PULSEAUDIO_VERSION}" CACHE INTERNAL "PulseAudio version")
-endif ()
+find_path (MIR_CLIENT_INCLUDE_DIR NAMES mir_toolkit/mir_client_library.h PATH_SUFFIXES mirclient DOC "Mir client include directory")
+find_path (MIR_COMMON_INCLUDE_DIR NAMES mir_toolkit/common.h PATH_SUFFIXES mircommon DOC "Mir common include directory")
+find_library (MIR_CLIENT NAMES mirclient DOC "Mir client library")
+find_library (MIR_COMMON NAMES mircommon DOC "Mir common library")
+find_library (EGL NAMES EGL DOC "EGL library")
+find_library (XKB NAMES xkbcommon DOC "Xkb common library")
 
 include (FindPackageHandleStandardArgs)
-find_package_handle_standard_args (PulseAudio REQUIRED_VARS PULSEAUDIO_LIBRARIES PULSEAUDIO_INCLUDE_DIRS VERSION_VAR PULSEAUDIO_VERSION FAIL_MESSAGE "Could NOT find PulseAudio development library")
+find_package_handle_standard_args (Mir REQUIRED_VARS MIR_CLIENT MIR_COMMON EGL XKB MIR_CLIENT_INCLUDE_DIR MIR_COMMON_INCLUDE_DIR FAIL_MESSAGE "Could NOT find Mir display server")
+if (MIR_FOUND)
+    set (MIR_INCLUDE_DIRS ${MIR_CLIENT_INCLUDE_DIR} ${MIR_COMMON_INCLUDE_DIR})
+endif ()
 
-mark_as_advanced (PULSEAUDIO_INCLUDE_DIRS PULSEAUDIO_LIBRARIES)
+mark_as_advanced (MIR_CLIENT_INCLUDE_DIR MIR_COMMON_INCLUDE_DIR MIR_CLIENT MIR_COMMON EGL XKB)

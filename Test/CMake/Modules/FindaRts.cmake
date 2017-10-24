@@ -20,24 +20,24 @@
 # THE SOFTWARE.
 #
 
-# Find PulseAudio development library
+# Find aRts development library
 #
-#  PULSEAUDIO_FOUND
-#  PULSEAUDIO_INCLUDE_DIRS
-#  PULSEAUDIO_LIBRARIES
-#  PULSEAUDIO_VERSION
+#  ARTS_FOUND
+#  ARTS_INCLUDE_DIRS
+#  ARTS_LIBRARIES
+#  ARTS_VERSION
 #
 
-find_path (PULSEAUDIO_INCLUDE_DIRS NAMES pulse/pulseaudio.h DOC "PulseAudio include directory")
-find_library (PULSEAUDIO_LIBRARIES NAMES pulse-simple DOC "PulseAudio library")
+find_path (ARTS_INCLUDE_DIRS NAMES artsc/artsc.h PATH_SUFFIXES kde DOC "aRts include directory")
+find_library (ARTS_LIBRARIES NAMES artsc DOC "aRts library")
 
-if (NOT PULSEAUDIO_VERSION AND PULSEAUDIO_INCLUDE_DIRS AND EXISTS ${PULSEAUDIO_INCLUDE_DIRS}/pulse/version.h)   # Only do this once
-    file (STRINGS ${PULSEAUDIO_INCLUDE_DIRS}/pulse/version.h PULSEAUDIO_VERSION REGEX "^.*pa_get_headers_version.+\"[^\"]*\".*$")
-    string (REGEX REPLACE "^.*pa_get_headers_version.+\"([^\"]*)\".*$" \\1 PULSEAUDIO_VERSION "${PULSEAUDIO_VERSION}")      # Stringify to guard against empty variable
-    set (PULSEAUDIO_VERSION "${PULSEAUDIO_VERSION}" CACHE INTERNAL "PulseAudio version")
+if (NOT ARTS_VERSION AND ARTS_INCLUDE_DIRS AND EXISTS ${ARTS_INCLUDE_DIRS}/arts/artsversion.h)   # Only do this once
+    file (STRINGS ${ARTS_INCLUDE_DIRS}/arts/artsversion.h ARTS_VERSION REGEX "^.*ARTS_VERSION.+\"[^\"]*\".*$")
+    string (REGEX REPLACE "^.*ARTS_VERSION.+\"([^\"]*)\".*$" \\1 ARTS_VERSION "${ARTS_VERSION}")      # Stringify to guard against empty variable
+    set (ARTS_VERSION "${ARTS_VERSION}" CACHE INTERNAL "aRts version")
 endif ()
 
 include (FindPackageHandleStandardArgs)
-find_package_handle_standard_args (PulseAudio REQUIRED_VARS PULSEAUDIO_LIBRARIES PULSEAUDIO_INCLUDE_DIRS VERSION_VAR PULSEAUDIO_VERSION FAIL_MESSAGE "Could NOT find PulseAudio development library")
+find_package_handle_standard_args (aRts REQUIRED_VARS ARTS_LIBRARIES ARTS_INCLUDE_DIRS VERSION_VAR ARTS_VERSION FAIL_MESSAGE "Could NOT find aRts development library")
 
-mark_as_advanced (PULSEAUDIO_INCLUDE_DIRS PULSEAUDIO_LIBRARIES)
+mark_as_advanced (ARTS_INCLUDE_DIRS ARTS_LIBRARIES)

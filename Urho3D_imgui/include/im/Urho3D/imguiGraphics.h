@@ -1,6 +1,7 @@
 #ifndef im_Urho3D_imguiGraphics_h
 #define im_Urho3D_imguiGraphics_h
 
+#include <Urho3D/Urho3D.h>
 
 #if defined(URHO3D_OPENGL)
 #include "im/Urho3D/imgui_impl_gl3.h"

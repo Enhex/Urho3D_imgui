@@ -10,15 +10,13 @@
 using namespace Urho3D;
 
 
-class MyApp : public Application
+struct MyApp : public Application
 {
-public:
-	MyApp(Context* context);
-	
+	using Application::Application;
 
 	SharedPtr<imgui> imGui;
 
-	virtual void Setup();
+	void Setup() override;
 
 	void Start();
 

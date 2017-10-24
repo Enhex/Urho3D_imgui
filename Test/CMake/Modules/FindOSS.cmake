@@ -20,24 +20,19 @@
 # THE SOFTWARE.
 #
 
-# Find PulseAudio development library
+# Find Open Sound System development library
 #
-#  PULSEAUDIO_FOUND
-#  PULSEAUDIO_INCLUDE_DIRS
-#  PULSEAUDIO_LIBRARIES
-#  PULSEAUDIO_VERSION
+#  OSS_FOUND
+#  OSS_INCLUDE_DIRS
+#  OSS_LIBRARIES
+#  OSS_USE_WORKAROUND_HEADER
 #
 
-find_path (PULSEAUDIO_INCLUDE_DIRS NAMES pulse/pulseaudio.h DOC "PulseAudio include directory")
-find_library (PULSEAUDIO_LIBRARIES NAMES pulse-simple DOC "PulseAudio library")
-
-if (NOT PULSEAUDIO_VERSION AND PULSEAUDIO_INCLUDE_DIRS AND EXISTS ${PULSEAUDIO_INCLUDE_DIRS}/pulse/version.h)   # Only do this once
-    file (STRINGS ${PULSEAUDIO_INCLUDE_DIRS}/pulse/version.h PULSEAUDIO_VERSION REGEX "^.*pa_get_headers_version.+\"[^\"]*\".*$")
-    string (REGEX REPLACE "^.*pa_get_headers_version.+\"([^\"]*)\".*$" \\1 PULSEAUDIO_VERSION "${PULSEAUDIO_VERSION}")      # Stringify to guard against empty variable
-    set (PULSEAUDIO_VERSION "${PULSEAUDIO_VERSION}" CACHE INTERNAL "PulseAudio version")
-endif ()
+find_path (OSS_INCLUDE_DIRS NAMES sys/soundcard.h soundcard.h PATH_SUFFIXES uClibc DOC "OSS include directory")
+find_library (OSS_LIBRARIES NAMES OSSlib ossaudio DOC "OSS library")
+find_file (OSS_USE_WORKAROUND_HEADER NAMES soundcard.h DOC "OSS use workaround header")
 
 include (FindPackageHandleStandardArgs)
-find_package_handle_standard_args (PulseAudio REQUIRED_VARS PULSEAUDIO_LIBRARIES PULSEAUDIO_INCLUDE_DIRS VERSION_VAR PULSEAUDIO_VERSION FAIL_MESSAGE "Could NOT find PulseAudio development library")
+find_package_handle_standard_args (OSS REQUIRED_VARS OSS_INCLUDE_DIRS FAIL_MESSAGE "Could NOT find OSS development library")
 
-mark_as_advanced (PULSEAUDIO_INCLUDE_DIRS PULSEAUDIO_LIBRARIES)
+mark_as_advanced (OSS_INCLUDE_DIRS OSS_LIBRARIES OSS_USE_WORKAROUND_HEADER)

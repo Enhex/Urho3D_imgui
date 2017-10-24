@@ -23,7 +23,6 @@ namespace Urho3D
 	imgui::imgui(Context * context) :
 		Object(context)
 	{
-
 		ImGuiIO& io = ImGui::GetIO();
 
 		io.KeyMap[ImGuiKey_Tab] = SCANCODE_TAB;                 // Keyboard mapping. ImGui will use those indices to peek into the io.KeyDown[] array.
