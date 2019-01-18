@@ -44,7 +44,6 @@ namespace Urho3D
 		io.KeyMap[ImGuiKey_Z] = SCANCODE_Z;
 
 		// setup callback functions
-		io.RenderDrawListsFn = ImGui_Impl_RenderDrawLists;
 		io.SetClipboardTextFn = SetClipboardText;
 		io.GetClipboardTextFn = GetClipboardText;
 
@@ -151,6 +150,7 @@ namespace Urho3D
 		// Render after Urho's main renderer has rendered
 		URHO3D_PROFILE(ImGuiRender);
 		ImGui::Render();
+		ImGui_Impl_RenderDrawLists(ImGui::GetDrawData());
 	}
 
 
